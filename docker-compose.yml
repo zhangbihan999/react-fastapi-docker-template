@@ -1,0 +1,18 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    volumes:
+      - /app/node_modules # 保留容器中的 node_modules 目录
+      - ./frontend:/app # 将 ./frontend 文件夹下的内容挂载到 /app 目录下
